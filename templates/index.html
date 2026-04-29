@@ -1,69 +1,44 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collecte Sanitaire 🏥</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        h1 { color: #2c3e50; font-size: 24px; margin-bottom: 20px; }
+        .logo { font-size: 50px; margin-bottom: 10px; }
+        label { display: block; text-align: left; margin: 10px 0 5px; color: #34495e; font-weight: bold; }
+        select, input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #dcdde1; border-radius: 8px; box-sizing: border-box; }
+        button { background-color: #3498db; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; transition: background 0.3s; }
+        button:hover { background-color: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo">🩺</div>
+        <h1>Collecte Sanitaire</h1>
+        <form action="/envoyer" method="POST">
+            <label>📍 Zone de santé</label>
+            <select name="zone">
+                <option value="Littoral">Littoral (Douala)</option>
+                <option value="Centre">Centre (Yaoundé)</option>
+                <option value="Ouest">Ouest (Bafoussam)</option>
+            </select>
 
-   <meta charset="UTF-8">
-   <title>Collecte sanitaire</title>
-     <style>
-     
-      body {font-family:
-      sans-serif; background-color: #eef2f3;
-      display: flex; justify-content:
-      center; padding-top: 50px; }
-      .form-container {background:
-      white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px
-      rgba(0,0,0,0,1); width: 350px;  }
-         h2 { color: #2c3e50;
-       text-align: center; }
-          label{ display: block;
-          margin-top: 15px; font-weight: bold; }
-          input, slect, button {width: 100%; padding: 10px; margin-top: 5px;
-          border-radius: 5px; border: 1px solid
-          #ccc; box-sizing: border-box; }
-          
-            butotn { background-color: #3498db; color: white; border: none;
-            margin-top: 20px; cursor: pointer; 
-            font-size: 16px;}
-            
-              button:hover
-              { background-color: #2980b9; }
-           </style>
-           </head>
-           
-             <body>
-                 <div class="form-container">
-                 <h2> Collecte Sanitaire</h2>
-                 <form action="/envoyer" method="POST">
-                 
-                         <label>Zone de sante</label>
-                         <select name="zone">
-                            <option
-                            value="Littoral">Littoral (Douala)</option>
-                            <option 
-                            value="Centre">Centre (Yaounde)</option>
-                            <option
-                            value="Ouest">Ouest (Bafoussam)</option>
-                            
-                                 </select>
-                                 
-                                 <label>Age du patient</label>
-                                 
-                                 <input type="number" name="age" required min="0">
-                                 <label>Diagnostic suspect</label>
-                                 
-                                 <select name="maladie">
-                                 
-                                    <option
-                                    value="Paludisme">Paludisme</option>
-                                    <option
-                                    value="Cholera">Cholera</option>
-                                    <option
-                                    value="Fievre jaune">Fievre jaune</option>
-                                   </select>
-                                   
-                                   <button>
-                           type="submit">Enregistrer la donnee</button>
-                                </form>
-                               </div>
-                              </body>
-                             </html>
+            <label>👤 Âge du patient</label>
+            <input type="number" name="age" placeholder="Ex: 25" required>
+
+            <label>🤒 Diagnostic suspect</label>
+            <select name="maladie">
+                <option value="Paludisme">Paludisme 🦟</option>
+                <option value="Grippe">Grippe 🌡️</option>
+                <option value="Autre">Autre 📋</option>
+            </select>
+
+            <button type="submit">🚀 Enregistrer la donnée</button>
+        </form>
+    </div>
+</body>
+</html>
