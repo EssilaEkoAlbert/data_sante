@@ -1,0 +1,68 @@
+a<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>📊 Dashboard Santé</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f1f5f9; padding: 20px; color: #334155; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        h1 { color: #0d9488; text-align: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        #map { height: 450px; width: 100%; border-radius: 15px; margin-bottom: 25px; border: 2px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+        th { background: #f8fafc; color: #64748b; font-size: 0.85rem; text-transform: uppercase; }
+        .btn { display: inline-block; padding: 12px 24px; background: #0d9488; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; transition: 0.3s; }
+        .btn:hover { background: #0f766e; }
+        .btn-export { background: #2563eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Statistiques de Collecte</h1>
+        
+        <div id="map"></div>
+
+        <table>
+            <thead>
+                <tr><th>Zone de Santé</th><th>Âge</th><th>Diagnostic suspect</th></tr>
+            </thead>
+            <tbody>
+                {% for d in donnees %}
+                <tr>
+                    <td><strong>{{ d.zone }}</strong></td>
+                    <td>{{ d.age }} ans</td>
+                    <td>{{ d.diagnostic }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="text-align: center;">
+            <a href="/" class="btn">➕ Nouvelle Saisie</a>
+            <a href="/export" class="btn btn-export">📥 Télécharger Excel (CSV)</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([7.3697, 12.3547], 6); 
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        var zonesCoords = {
+            "Littoral (Douala)": [4.05, 9.70],
+            "Centre (Yaoundé)": [3.84, 11.50],
+            "Ouest (Bafoussam)": [5.47, 10.41],
+            "Nord (Garoua)": [9.30, 13.39]
+        };
+
+        {% for d in donnees %}
+            if (zonesCoords["{{ d.zone }}"]) {
+                L.marker(zonesCoords["{{ d.zone }}"]).addTo(map)
+                .bindPopup("<b>{{ d.diagnostic }}</b><br>Zone: {{ d.zone }}");
+            }
+        {% endfor %}
+    </script>
+</body>
+</html>
