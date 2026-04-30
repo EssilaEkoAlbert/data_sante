@@ -6,7 +6,9 @@ import csv
 app = Flask(__name__)
 
 
-donnees_sante = []
+donnees_sante = [
+      {'zone': 'Centre', 'age': '25', 'diagnostic': 'Paludisme'}
+      ]
 
 
 coords = {
