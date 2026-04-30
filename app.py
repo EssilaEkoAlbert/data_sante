@@ -30,6 +30,7 @@ def enregistrer():
             'zone': zone,
             'age': age,
             'diagnostic': maladie
+    'diagnostic'       
         })
     return redirect(url_for('dashboard'))
 
